@@ -53,12 +53,14 @@ if __name__ == '__main__':
 
     for i in range(len(pod_list)):
         m, page_titles = joblib.load(pod_list[i])
+        m = m.toarray()
         pod_keywords.append(mk_pod_keywords(page_titles))
         s = np.sum(m, axis=0)
         ns = s / np.linalg.norm(s)
         pod_summary_mat[i] = ns
 
     pod_keywords = clean_pod_keywords(pod_keywords)
+    pod_list = [p.replace(lang+'/','') for p in pod_list]
     print(pod_summary_mat.shape, len(pod_list), len(pod_keywords))
 
     summary_file = lang+'/'+lang+'wiki.summary.fh'
