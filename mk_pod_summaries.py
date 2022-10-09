@@ -21,6 +21,7 @@ from collections import Counter
 
 
 def mk_pod_keywords(page_titles):
+    print("POD",page_titles)
     words = [w for title in page_titles for w in title.split()]
     dist = Counter(words)
     return [pair[0] for pair in dist.most_common(50) if pair[0].isalpha()]
